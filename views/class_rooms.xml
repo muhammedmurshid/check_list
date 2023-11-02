@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="model_class_room_list_check_list_form" model="ir.ui.view">
+        <field name="name">Class Room</field>
+        <field name="model">check.list.class.room</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Class Room">
+                <sheet>
+                    <div class="oe_title pr-0">
+                        <h1 class="d-flex flex-row justify-content-between">
+                            <field name="name" class="o_task_name text-truncate" placeholder="Class Room..."
+                                   default_focus="1" required="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <!--                            <field name="name"/>-->
+                            <field name="branch" required="1"/>
+                            <field name="capacity"/>
+                            <field name="assets"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids" options="{'post_refresh': 'recipients'}"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <record id="model_class_room_list_check_list_view" model="ir.ui.view">
+        <field name="name">Class Rooms</field>
+        <field name="model">check.list.class.room</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="branch"/>
+                <field name="assets"/>
+            </tree>
+
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="model_class_room_list_check_action">
+        <field name="name">Class Rooms</field>
+        <field name="res_model">check.list.class.room</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Class Rooms" id="menu_class_room_list_check"
+              action="model_class_room_list_check_action"
+              parent="check_list_main_menu"
+              sequence="2"/>
+
+
+</odoo>

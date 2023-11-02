@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="model_check_list_form_view" model="ir.ui.view">
+        <field name="name">Logic Check List</field>
+        <field name="model">logic.check.list</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Check List">
+                <header>
+                    <field name="state" widget="statusbar"/>
+                    <button name="action_completed" string="Completed" type="object" states="draft"
+                            class="oe_highlight"/>
+                    <button name="action_cancel" string="Cancelled" type="object" states="draft"/>
+                    <button name="action_return_to_draft" string="Return to Draft" type="object"
+                            states="completed,cancelled"/>
+                </header>
+                <sheet>
+                    <widget name="web_ribbon" title="Cancelled" bg_color="bg-danger"
+                            attrs="{'invisible': [('state', '!=', 'cancelled')]}"/>
+                    <widget name="web_ribbon" title="Completed" bg_color="bg-success"
+                            attrs="{'invisible': [('state', '!=', 'completed')]}"/>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="reference_no" readonly="1"/>
+                        </h1>
+                    </div>
+
+                    <group>
+                        <group>
+                            <field name="branch"/>
+                            <field name="class_id" options="{'no_create': True}"/>
+                            <field name="assigned_date" required="1"/>
+
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Work Progress" name="progress">
+                            <field name="work_progress_ids">
+                                <tree string="Work Progress" editable="bottom">
+                                    <field name="works"/>
+                                    <field name="assigned_to"/>
+                                    <field name="status" string="Finished/Not"/>
+                                    <field name="date" string="Completed Date"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids" options="{'post_refresh': 'recipients'}"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <record id="check_list_list_view" model="ir.ui.view">
+        <field name="name">Check Lists</field>
+        <field name="model">logic.check.list</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="reference_no"/>
+                <field name="assigned_date"/>
+                <field name="class_id"/>
+                <field name="branch"/>
+                <field name="state" widget="badge" decoration-success="state == 'completed'" decoration-danger="state == 'cancelled'" decoration-info="state == 'draft'"/>
+            </tree>
+
+        </field>
+    </record>
+
+    <record id="seq_check_list" model="ir.sequence">
+        <field name="name">Check List Sequence</field>
+        <field name="code">logic.check.list</field>
+        <field name="prefix">CL</field>
+        <field name="padding">4</field>
+        <field name="company_id" eval="False"/>
+    </record>
+
+    <record model="ir.actions.act_window" id="check_list_action">
+        <field name="name">Check List</field>
+        <field name="res_model">logic.check.list</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem name="Check List"
+              id="check_list_main_menu"
+              web_icon="check_list/static/description/icon.png"
+              sequence="10"/>
+
+    <menuitem name="Check List" id="menu_check_list"
+              action="check_list_action"
+              parent="check_list_main_menu"
+              sequence="1"/>
+
+
+</odoo>

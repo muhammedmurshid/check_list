@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="work_lists_for_check_list" model="ir.ui.view">
+        <field name="name">Work Lists</field>
+        <field name="model">work.lists.check.list</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Work">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids" options="{'post_refresh': 'recipients'}"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="works_lists_for_check_list_tree_view" model="ir.ui.view">
+        <field name="name">Works</field>
+        <field name="model">work.lists.check.list</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+            </tree>
+
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="work_lists_for_check_list_action">
+        <field name="name">Works</field>
+        <field name="res_model">work.lists.check.list</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Work Lists" id="work_list_for_check_list_menu_item"
+              action="work_lists_for_check_list_action"
+              parent="works_for_check_list_main_menu_item"
+              sequence="1"/>
+</odoo>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="works_for_check_list_form_view" model="ir.ui.view">
+        <field name="name">Work</field>
+        <field name="model">work.assignment.check.list</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Work">
+                <sheet>
+                    <div class="oe_title pr-0">
+                        <h1 class="d-flex flex-row justify-content-between">
+                            <field name="name" class="o_task_name text-truncate" placeholder="Work Title..."
+                                   default_focus="1" required="1"/>
+
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="branch" required="1"/>
+<!--                            <field name="name"/>-->
+                            <field name="class_room_id" required="1" options="{'no_create': True}"/>
+
+                            <field name="date"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Works" name="works">
+                            <field name="work_ids" widget="one2many">
+                                <tree string="Works" editable="bottom">
+                                    <field name="work"/>
+                                    <field name="assign_to"/>
+                                </tree>
+                            </field>
+                        </page>
+
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids" options="{'post_refresh': 'recipients'}"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="works_for_check_list_tree_view" model="ir.ui.view">
+        <field name="name">Works</field>
+        <field name="model">work.assignment.check.list</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="branch"/>
+                <field name="class_room_id"/>
+            </tree>
+
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="works_for_check_list_action">
+        <field name="name">Works</field>
+        <field name="res_model">work.assignment.check.list</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Works" id="works_for_check_list_main_menu_item"
+              parent="check_list_main_menu"
+              sequence="3"/>
+
+    <menuitem name="Work Assign" id="works_for_check_list_menu_item"
+              action="works_for_check_list_action"
+              parent="works_for_check_list_main_menu_item"
+              sequence="3"/>
+
+
+</odoo>

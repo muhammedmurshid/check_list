@@ -1,0 +1,16 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+access_check_list,access_list,model_logic_check_list,,1,1,1,1
+
+access_check_list_class,access_list,model_check_list_class_room,,1,1,1,1
+
+access_check_list_works,access_list,model_work_assignment_check_list,,1,1,1,1
+
+access_check_list_works_assign,access_list,model_works_lists,,1,1,1,1
+
+access_check_list_works_progress,access_list,model_work_progress,,1,1,1,1
+
+access_check_list_work_lists,access_list,model_work_lists_check_list,,1,1,1,1
+
+
+
+
