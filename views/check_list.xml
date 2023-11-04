@@ -28,7 +28,7 @@
                     <group>
                         <group>
                             <field name="branch"/>
-                            <field name="class_id" options="{'no_create': True}"/>
+<!--                            <field name="class_id" options="{'no_create': True}"/>-->
                             <field name="assigned_date" required="1"/>
 
                         </group>
@@ -38,6 +38,7 @@
                             <field name="work_progress_ids">
                                 <tree string="Work Progress" editable="bottom">
                                     <field name="works"/>
+                                    <field name="class_room"/>
                                     <field name="assigned_to"/>
                                     <field name="status" string="Finished/Not"/>
                                     <field name="date" string="Completed Date"/>
@@ -61,7 +62,7 @@
             <tree>
                 <field name="reference_no"/>
                 <field name="assigned_date"/>
-                <field name="class_id"/>
+<!--                <field name="class_id"/>-->
                 <field name="branch"/>
                 <field name="state" widget="badge" decoration-success="state == 'completed'" decoration-danger="state == 'cancelled'" decoration-info="state == 'draft'"/>
             </tree>

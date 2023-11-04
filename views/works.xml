@@ -21,7 +21,7 @@
 <!--                            <field name="name"/>-->
                             <field name="class_room_id" required="1" options="{'no_create': True}"/>
 
-                            <field name="date"/>
+                            <field name="date" required="1"/>
                         </group>
                     </group>
                     <notebook>
@@ -50,6 +50,7 @@
         <field name="model">work.assignment.check.list</field>
         <field name="arch" type="xml">
             <tree>
+                <field name="date"/>
                 <field name="name"/>
                 <field name="branch"/>
                 <field name="class_room_id"/>

@@ -5,7 +5,7 @@ class CheckList(models.Model):
     _name = 'logic.check.list'
     _description = 'Check List'
     _inherit = ['mail.thread', 'mail.activity.mixin']
-    _rec_name = 'class_id'
+    _rec_name = 'branch'
 
     branch = fields.Selection([('corporate_office', 'Corporate Office'), ('cochin_campus', 'Cochin Campus'),
                                ('kottayam_campus', 'Kottayam Campus'), ('calicut_campus', 'Calicut Campus'),
@@ -29,18 +29,18 @@ class CheckList(models.Model):
         res = super(CheckList, self).create(vals)
         return res
 
-    @api.onchange('branch')
-    def _batch_class_rooms(self):
-        self.class_id = False
-        class_room = self.env['check.list.class.room'].sudo().search([('branch', '=', self.branch)])
-        rec = []
-        rec.clear()
-        for room in class_room:
-            rec.append(room.id)
-        domain = [('id', 'in', rec)]
-        return {'domain': {'class_id': domain}}
-
-    class_id = fields.Many2one('check.list.class.room', string='Class Room', required=True, domain=_batch_class_rooms)
+    # @api.onchange('branch')
+    # def _batch_class_rooms(self):
+    #     self.class_id = False
+    #     class_room = self.env['check.list.class.room'].sudo().search([('branch', '=', self.branch)])
+    #     rec = []
+    #     rec.clear()
+    #     for room in class_room:
+    #         rec.append(room.id)
+    #     domain = [('id', 'in', rec)]
+    #     return {'domain': {'class_id': domain}}
+    #
+    # class_id = fields.Many2one('check.list.class.room', string='Class Room', domain=_batch_class_rooms)
 
     @api.onchange('class_id', 'branch', 'assigned_date')
     def _onchange_work_progress(self):
@@ -49,14 +49,14 @@ class CheckList(models.Model):
         self.write({'work_progress_ids': unlink_commands})
         for work in works:
             datas = []
-
-            if self.class_id == work.class_room_id and self.branch == work.branch and self.assigned_date == work.date:
+            if self.branch == work.branch and self.assigned_date == work.date:
                 print(work.name, 'ola')
 
                 for i in work.work_ids:
                     res_list = {
                         'works': i.work.id,
                         'assigned_to': i.assign_to.id,
+                        'class_room': work.class_room_id.id
 
                     }
                     datas.append((0, 0, res_list))
@@ -84,6 +84,7 @@ class WorkProgress(models.Model):
     works = fields.Many2one('work.lists.check.list', string='Works')
     assigned_to = fields.Many2one('res.users', string='Assign To')
     date = fields.Date(string='Date')
+    class_room = fields.Many2one('check.list.class.room', string='Class Room')
     status = fields.Boolean(string='Status')
     work_progress_id = fields.Many2one('logic.check.list', string='Work')
 
