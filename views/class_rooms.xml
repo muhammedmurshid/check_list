@@ -18,7 +18,7 @@
                             <!--                            <field name="name"/>-->
                             <field name="branch" required="1"/>
                             <field name="capacity"/>
-                            <field name="assets"/>
+                            <field name="assets" widget="many2many_tags"/>
                         </group>
                     </group>
                 </sheet>

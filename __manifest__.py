@@ -5,6 +5,7 @@
     'depends': ['base', 'mail'],
     'data': [
         # 'data/activity_leads.xml',
+        'security/user_groups.xml',
         'security/ir.model.access.csv',
         'views/check_list.xml',
         'views/class_rooms.xml',

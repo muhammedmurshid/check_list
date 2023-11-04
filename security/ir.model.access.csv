@@ -1,15 +1,24 @@
 id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
 access_check_list,access_list,model_logic_check_list,,1,1,1,1
 
-access_check_list_class,access_list,model_check_list_class_room,,1,1,1,1
+access_check_list_class_operator,access_list,model_check_list_class_room,module_check_list_operator,1,1,1,1
+access_check_list_class,access_list,model_check_list_class_room,module_check_list_hr,1,0,0,0
 
-access_check_list_works,access_list,model_work_assignment_check_list,,1,1,1,1
 
-access_check_list_works_assign,access_list,model_works_lists,,1,1,1,1
+access_check_list_works,access_list,model_work_assignment_check_list,module_check_list_hr,1,0,0,0
+access_check_list_works_operator,access_list,model_work_assignment_check_list,module_check_list_operator,1,1,1,1
 
-access_check_list_works_progress,access_list,model_work_progress,,1,1,1,1
 
-access_check_list_work_lists,access_list,model_work_lists_check_list,,1,1,1,1
+access_check_list_works_assign,access_list,model_works_lists,module_check_list_hr,1,0,0,0
+access_check_list_works_assign_op,access_list,model_works_lists,module_check_list_operator,1,1,1,1
+
+
+access_check_list_works_progress,access_list,model_work_progress,module_check_list_hr,1,0,0,0
+access_check_list_works_progress_op,access_list,model_work_progress,module_check_list_operator,1,1,1,1
+
+
+access_check_list_work_lists,access_list,model_work_lists_check_list,module_check_list_hr,1,0,0,0
+access_check_list_work_lists_op,access_list,model_work_lists_check_list,module_check_list_operator,1,1,1,1
 
 
 
