@@ -12,6 +12,6 @@ class CheckListClassRoom(models.Model):
                                ('malappuram_campus', 'Malappuram Campus'), ('trivandrum_campus', 'Trivandrum Campus'),
                                ('palakkad_campus', 'Palakkad Campus'), ('dubai_campus', 'Dubai Campus')],
                               string='Branch')
-    assets = fields.Many2many('class.room.assets', string='Assets')
+    assets = fields.Many2many('logic.custody.class.assets', string='Assets')
     capacity = fields.Integer(string='Capacity')
 
